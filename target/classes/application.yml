@@ -1,0 +1,60 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: offer-engine-poc-two-apis
+
+  datasource:
+    url: ${DB_URL:jdbc:oracle:thin:@//localhost:1521/ORCLPDB1}
+    username: ${DB_USERNAME:OFFERENGINE}
+    password: ${DB_PASSWORD:offerengine}
+    driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      pool-name: OfferEnginePool
+      minimum-idle: ${DB_POOL_MIN_IDLE:2}
+      maximum-pool-size: ${DB_POOL_MAX_SIZE:20}
+      connection-timeout: ${DB_CONNECTION_TIMEOUT_MS:3000}
+      validation-timeout: ${DB_VALIDATION_TIMEOUT_MS:1000}
+      max-lifetime: ${DB_MAX_LIFETIME_MS:1800000}
+      connection-test-query: SELECT 1 FROM DUAL
+
+  jpa:
+    database-platform: org.hibernate.dialect.OracleDialect
+    open-in-view: false
+    hibernate:
+      # Local PoC default. Use validate in controlled environments after applying schema.sql.
+      ddl-auto: ${JPA_DDL_AUTO:update}
+    properties:
+      hibernate:
+        default_schema: ${DB_SCHEMA:OFFERENGINE}
+        jdbc.batch_size: 100
+        order_inserts: true
+        order_updates: true
+
+  security:
+    user:
+      name: ${BASIC_AUTH_USER:admin}
+      password: ${BASIC_AUTH_PASSWORD:admin123}
+      roles:
+        - LABEL_ADMIN
+        - MERCHANT_CHANNEL
+        - ACTUATOR
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+
+offer-engine:
+  payload-log-retention-days: ${PAYLOAD_LOG_RETENTION_DAYS:14}
+  customer-inquiry:
+    max-results: ${CUSTOMER_INQUIRY_MAX_RESULTS:50}
+
+logging:
+  level:
+    com.hdfcbank.offerengine: INFO
