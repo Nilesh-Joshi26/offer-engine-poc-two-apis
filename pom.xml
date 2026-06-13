@@ -20,7 +20,7 @@
     <description>CR_12-05-2026 Offer Engine PoC for Label maintenance and Customer Inquiry</description>
 
     <properties>
-        <java.version>25</java.version>
+        <java.version>17</java.version>
         <oracle.jdbc.version>23.9.0.25.07</oracle.jdbc.version>
     </properties>
 

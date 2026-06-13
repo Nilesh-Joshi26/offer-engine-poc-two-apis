@@ -8,7 +8,7 @@ spring:
   datasource:
     url: ${DB_URL:jdbc:oracle:thin:@//localhost:1521/orclpdb}
     username: ${DB_USERNAME:OFFERENGINE}
-    password: ${DB_PASSWORD:offerengine}
+    password: ${DB_PASSWORD:OfferEngine#123}
     driver-class-name: oracle.jdbc.OracleDriver
     hikari:
       pool-name: OfferEnginePool
