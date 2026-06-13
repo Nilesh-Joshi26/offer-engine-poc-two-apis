@@ -1,0 +1,14 @@
+target/
+*.log
+*.tmp
+*.class
+
+.idea/
+*.iml
+.vscode/
+
+.env
+application-local.yml
+
+hs_err_pid*
+replay_pid*

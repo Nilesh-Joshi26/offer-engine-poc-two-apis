@@ -25,7 +25,7 @@ Run locally with Oracle 19c:
 
 ```powershell
 cd C:\Users\Nilesh\Downloads\samples\offer-engine-poc-two-apis
-$env:DB_URL="jdbc:oracle:thin:@//localhost:1521/ORCLPDB1"
+$env:DB_URL="jdbc:oracle:thin:@//localhost:1521/orclpdb"
 $env:DB_USERNAME="OFFERENGINE"
 $env:DB_PASSWORD="offerengine"
 mvn spring-boot:run
@@ -40,7 +40,7 @@ $env:JPA_DDL_AUTO="validate"
 Optional sample data:
 
 ```powershell
-sqlplus OFFERENGINE/offerengine@localhost:1521/ORCLPDB1 @src/main/resources/sample-data.sql
+sqlplus OFFERENGINE/offerengine@//localhost:1521/orclpdb @src/main/resources/sample-data.sql
 ```
 
 Smoke requests:
