@@ -33,11 +33,12 @@ public class CustomerInquiryApplicationService {
     @Transactional(readOnly = true)
     public CustomerInquiryResponse inquire(CustomerInquiryRequest request) {
         CustomerInquiryCriteria criteria = new CustomerInquiryCriteria(
-                request.campaignName(), request.aan(), request.mobileNumber(), request.emailId(), request.merchantId());
+                request.campaignName(), request.labelCode(), request.aan(), request.mobileNumber(), request.emailId(),
+                request.merchantId(), request.merchantName(), request.keyField3(), request.keyField4(), request.keyField5());
         var matches = customerInquiryUseCase.findEligibleOffers(criteria).stream()
                 .map(OfferMatchResponse::from)
                 .toList();
-        CustomerInquiryResponse response = new CustomerInquiryResponse(request, matches.size(), matches);
+        CustomerInquiryResponse response = new CustomerInquiryResponse(request, matches.size() > 0, matches.size(), matches);
         logPayload(request, response);
         return response;
     }
