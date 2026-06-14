@@ -24,10 +24,10 @@ public interface OfferCustomerJpaRepository extends JpaRepository<OfferCustomerE
               and (:keyField4 is null or c.keyField4 = :keyField4)
               and (:keyField5 is null or c.keyField5 = :keyField5)
               and (:merchantId is null or exists (
-                    select 1 from OfferMerchantKeyEntity m
+                    select m.id from OfferMerchantKeyEntity m
                     where m.customerRecordId = c.id and m.merchantId = :merchantId))
               and (:merchantName is null or exists (
-                    select 1 from OfferMerchantKeyEntity m
+                    select m.id from OfferMerchantKeyEntity m
                     where m.customerRecordId = c.id and lower(m.merchantName) = lower(:merchantName)))
             order by c.sourceSequenceNumber asc
             """)
